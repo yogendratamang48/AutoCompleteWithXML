@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<IncomeTypes>
+  <IncomeType>
+    <Name>ब्यापार व्यवसायबाट नाफा</Name>
+    <Type>आय</Type>
+  </IncomeType>
+  <IncomeType>
+    <Name>लाभांश/ब्याज</Name>
+    <Type>आय</Type>
+  </IncomeType>
+  <IncomeType>
+    <Name>कृषि पशुपालनको आय</Name>
+    <Type>आय</Type>
+  </IncomeType>
+  <IncomeType>
+    <Name>घर जग्गा/सवारी साधन भाडा</Name>
+    <Type>आय</Type>
+  </IncomeType>
+  <IncomeType>
+    <Name>तलब भत्ता पेन्शन (कार्यरत संस्थाको नाम)</Name>
+    <Type>आय</Type>
+  </IncomeType>
+</IncomeTypes>

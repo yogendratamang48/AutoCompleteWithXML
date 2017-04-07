@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using Tests.Models;
+using Tests.Models.BLL;
 
 namespace Tests.Controllers
 {
@@ -35,5 +36,29 @@ namespace Tests.Controllers
             
             return Json(incomeTypes, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ShowStudents()
+        {
+            var lstStudents = DAL.GetAllStudents();
+            return View(lstStudents);
+        }
+
+        public ActionResult NewStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewStudent(Student s)
+        {
+            if (ModelState.IsValid)
+            {
+                DAL.SaveStudent(s);
+                return RedirectToAction("ShowStudents");
+            }
+            return View(s);
+        }
+
+
     }
 }

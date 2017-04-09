@@ -27,7 +27,7 @@ namespace Tests.Models.BLL
 
         public static bool SaveStudent(Student s)
         {
-            bool isSuccessful = false;
+            
             var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/TestData.xml");
             try
             {
@@ -46,5 +46,32 @@ namespace Tests.Models.BLL
             }
             
         }
+
+        public static bool SaveListOfStudents(IEnumerable<Student> sList)
+        {
+
+            var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/TestData.xml");
+
+            try
+            {
+                XDocument xDoc = XDocument.Load(path);
+                foreach (Student s in sList)
+                {
+
+                    xDoc.Element("Students").Add(new XElement("Student",
+                        new XElement("Name", s.StudentName),
+                        new XElement("RollNo", s.StudentRoll)));
+
+                    xDoc.Save(path);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
     }
 }

@@ -53,12 +53,31 @@ namespace Tests.Controllers
         {
             if (ModelState.IsValid)
             {
-                DAL.SaveStudent(s);
-                return RedirectToAction("ShowStudents");
+                if (DAL.SaveStudent(s))
+                {
+                    return RedirectToAction("ShowStudents");
+                }
+                
             }
             return View(s);
         }
 
+        public ActionResult PostListOfStudents()
+        {
+            return View(new BulkStudent());
+        }
+        [HttpPost]
+        public ActionResult PostListOfStudents(BulkStudent bulk, IEnumerable<Student> lstStudent)
+        {
+            if (ModelState.IsValid)
+            {
+                if (DAL.SaveListOfStudents(lstStudent))
+                {
+                    return RedirectToAction("ShowStudents");
+                }
+            }
+            return View();
+        }
 
     }
 }

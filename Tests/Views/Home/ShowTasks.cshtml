@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Tests.Models.ToDo>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskDescription)
+        </th>
+  
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskDescription)
+        </td>
+       
+    </tr>
+}
+
+</table>

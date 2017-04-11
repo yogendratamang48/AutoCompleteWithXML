@@ -79,5 +79,29 @@ namespace Tests.Controllers
             return View();
         }
 
+
+        public ActionResult TodoTask()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TodoTask(ToDo toDo)
+        {
+            if (ModelState.IsValid)
+            {
+                DAL.SaveTask(toDo);
+                return RedirectToAction("TodoTask");
+            }
+
+            return View(toDo);
+        }
+        public ActionResult ShowTasks()
+        {
+            var lst = DAL.GetAllTasks();
+            return PartialView("ShowTasks", lst.ToList());
+        }
+
     }
 }

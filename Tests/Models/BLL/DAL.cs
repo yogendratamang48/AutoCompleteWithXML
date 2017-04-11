@@ -47,6 +47,42 @@ namespace Tests.Models.BLL
             
         }
 
+        public static bool SaveTask(ToDo t)
+        {
+
+            var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/ToDo.xml");
+            try
+            {
+                XDocument xDoc = XDocument.Load(path);
+
+                xDoc.Element("Tasks").Add(new XElement("Task",
+                    new XElement("TaskDescription", t.TaskDescription),
+                    new XElement("TaskNumber", t.TaskNumber)));
+
+                xDoc.Save(path);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public static List<ToDo> GetAllTasks()
+        {
+            var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/ToDo.xml");
+            IEnumerable<ToDo> Tasks = XDocument.Load(path).Element("Tasks")
+                      .Descendants("Task")
+                      .Select(x => new ToDo
+                      {
+                          TaskDescription = x.Element("TaskDescription").Value,
+                          TaskNumber = x.Element("TaskNumber").Value
+
+                      });
+
+            return Tasks.ToList();
+        }
         public static bool SaveListOfStudents(IEnumerable<Student> sList)
         {
 
@@ -72,6 +108,7 @@ namespace Tests.Models.BLL
             }
 
         }
+
 
     }
 }

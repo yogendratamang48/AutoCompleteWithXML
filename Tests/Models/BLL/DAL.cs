@@ -9,7 +9,19 @@ namespace Tests.Models.BLL
     public static class DAL
     {
         
+        public static List<IncomeInfo> GetIncomeOptions()
+                {
+                     var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/IncomeOptions.xml");
+                            IEnumerable<IncomeInfo> incomeTypes = XDocument.Load(path).Element("IncomeTypes")
+                                                .Descendants("IncomeType")
+                                                .Select(x => new IncomeInfo
+                                                {
+                                                    IncomeTitle = x.Element("Name").Value,
+                                                    IncomeType = x.Element("Type").Value
 
+                                                });
+            return incomeTypes.ToList();
+            }
         public static List<Student> GetAllStudents()
         {
             var path = System.Web.HttpContext.Current.Server.MapPath("~/Resources/TestData.xml");

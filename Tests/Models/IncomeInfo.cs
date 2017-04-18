@@ -10,5 +10,10 @@ namespace Tests.Models
         public string IncomeTitle { get; set; }
         public string IncomeType { get; set; }
     }
-    
+
+    public class MultiIncome
+    {
+        public List<string> Incomes  { get; set; }
+    }
+
 }
